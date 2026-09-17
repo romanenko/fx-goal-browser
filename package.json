@@ -1,0 +1,39 @@
+{
+  "name": "fx-goal-browser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "An experiment in fast, goal-driven browser use with structured JSON results.",
+  "bin": {
+    "fx-goal-browser": "dist/cli.js"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node --env-file-if-exists=.env dist/cli.js",
+    "dev": "node --env-file-if-exists=.env --import tsx src/cli.ts",
+    "test": "node --import tsx --test test/*.test.ts",
+    "check": "tsc --noEmit",
+    "bench": "node --import tsx scripts/benchmark-browser.ts",
+    "fixture": "node examples/fixture.mjs",
+    "browser:install": "playwright install chromium"
+  },
+  "dependencies": {
+    "ai": "^7.0.105",
+    "libfx": "0.0.10",
+    "playwright": "1.63.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.20.0",
+    "typescript": "7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/romanenko/fx-goal-browser.git"
+  }
+}

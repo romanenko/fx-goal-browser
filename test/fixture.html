@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Stay finder</title>
+<main>
+  <h1>Find a stay</h1>
+  <form>
+    <label>Destination <input name="city" required></label>
+    <label>Category <select name="category"><option>All</option><option>Design</option></select></label>
+    <label><input name="refund" type="checkbox">Free cancellation</label>
+    <button>Search stays</button>
+  </form>
+  <section aria-live="polite" id="results"><p>No search applied.</p></section>
+</main>
+<script>
+document.querySelector('form').onsubmit = event => {
+  event.preventDefault();
+  const form = new FormData(event.target);
+  const city = form.get('city');
+  const category = form.get('category');
+  const refundable = form.has('refund');
+  document.querySelector('#results').textContent = 'Searching…';
+  setTimeout(() => {
+    const results = document.querySelector('#results');
+    results.replaceChildren();
+    const summary = document.createElement('p');
+    summary.textContent = `Applied filters: ${city} · ${category} · Free cancellation ${refundable ? 'on' : 'off'}`;
+    results.append(summary);
+    if (String(city).toLowerCase() === 'democity' && category === 'Design' && refundable) {
+      const button = document.createElement('button');
+      button.textContent = 'Open Sample Stay';
+      button.onclick = () => {
+        history.pushState({}, '', '/stays/sample-stay');
+        document.title = 'Sample Stay | Stay finder';
+        const heading = document.createElement('h1');
+        heading.textContent = 'Sample Stay';
+        const detail = document.createElement('p');
+        detail.textContent = 'DemoCity · Design · Free cancellation · €120 per night';
+        document.querySelector('main').replaceChildren(heading, summary, detail);
+      };
+      results.append(button);
+    } else {
+      results.append('No matching stays.');
+    }
+  }, 80);
+};
+</script>
+</html>

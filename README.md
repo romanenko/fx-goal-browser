@@ -31,7 +31,7 @@ cp .env.example .env
 Set `AI_GATEWAY_API_KEY` in `.env`, then run:
 
 ```sh
-node dist/cli.js --headed "Open https://example.com and return the page heading."
+node dist/cli.js --headed "Find the top 5 movies currently trending on Rotten Tomatoes to watch at home. Rank them by Popcornmeter score, highest first. Return each movie's title, score, and URL."
 ```
 
 The result goes to stdout as JSON; progress goes to stderr. There is no default
